@@ -1,0 +1,8 @@
+{% extends 'library/base.html' %}
+{% block title %}{{ entity_title }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="shell"><span class="eyebrow">ПОДТВЕРЖДЕНИЕ</span><h1>{{ entity_title }}</h1></div></section>
+<section class="section shell"><div class="form-card"><h2>Удалить «{{ object }}»?</h2><p class="muted">Это действие нельзя отменить. Если запись используется в связанных таблицах, база данных защитит её от удаления.</p>
+<form method="post">{% csrf_token %}<div class="entity-actions"><button class="btn danger-btn" type="submit">Удалить запись</button><a href="{% url 'library:'|add:entity_slug|add:'_detail' object.pk %}">Отмена</a></div></form>
+</div></section>
+{% endblock %}

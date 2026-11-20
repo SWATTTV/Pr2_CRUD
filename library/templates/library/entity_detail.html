@@ -1,0 +1,16 @@
+{% extends 'library/base.html' %}
+{% block title %}{{ object }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="shell"><span class="eyebrow">ПОДРОБНОСТИ</span><h1>{{ object }}</h1></div></section>
+<section class="section shell"><div class="detail-card">
+{% if object.cover %}<img class="detail-image" src="{{ object.cover.url }}" alt="Обложка {{ object }}">{% elif object.photo %}<img class="detail-image" src="{{ object.photo.url }}" alt="Фото {{ object }}">{% endif %}
+<div class="detail-data">
+  {% if entity_slug == 'book' %}
+    <p><b>Автор:</b> {{ object.author }}</p><p><b>Категория:</b> {{ object.category }}</p><p><b>Издательство:</b> {{ object.publisher }}</p><p><b>Год:</b> {{ object.publication_year }}</p><p><b>Инвентарный номер:</b> {{ object.isbn }}</p><p><b>Экземпляров:</b> {{ object.copies }}</p><p>{{ object.description|linebreaksbr }}</p>
+  {% elif entity_slug == 'author' %}<p>{{ object.biography|linebreaksbr }}</p>
+  {% elif entity_slug == 'category' %}<p>{{ object.description|linebreaksbr }}</p>
+  {% elif entity_slug == 'reader' %}<p><b>Студенческий билет:</b> {{ object.student_card }}</p><p><b>Группа:</b> {{ object.group }}</p><p><b>Почта:</b> {{ object.email }}</p>
+  {% elif entity_slug == 'loan' %}<p><b>Книга:</b> {{ object.book }}</p><p><b>Читатель:</b> {{ object.reader }}</p><p><b>Библиотекарь:</b> {{ object.librarian }}</p><p><b>Дата выдачи:</b> {{ object.issue_date|date:'d.m.Y' }}</p><p><b>Вернуть до:</b> {{ object.due_date|date:'d.m.Y' }}</p><p><b>Статус:</b> {% if object.returned %}Возвращена{% else %}На руках{% endif %}</p>{% endif %}
+<div class="entity-actions"><a href="{% url 'library:'|add:entity_slug|add:'_list' %}">← Вернуться к списку</a><a href="{% url 'library:'|add:entity_slug|add:'_update' object.pk %}">Редактировать</a><a class="danger-link" href="{% url 'library:'|add:entity_slug|add:'_delete' object.pk %}">Удалить</a></div>
+</div></div></section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'library/base.html' %}
+{% block title %}{{ entity_title }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="shell"><span class="eyebrow">ЭЛЕКТРОННАЯ БИБЛИОТЕКА</span><h1>{{ entity_title }}</h1><p>Просмотр и управление данными библиотеки.</p></div></section>
+<section class="section shell">
+  <div class="catalog-top"><h2>Список записей</h2><a class="btn dark" href="{% url 'library:'|add:entity_slug|add:'_create' %}">+ Добавить</a></div>
+  <div class="cards three">
+    {% for item in object_list %}
+    <article class="book-card">
+      {% if item.cover %}<img class="entity-image" src="{{ item.cover.url }}" alt="Обложка {{ item }}">
+      {% elif item.photo %}<img class="entity-image" src="{{ item.photo.url }}" alt="Фото: {{ item }}">
+      {% else %}<div class="book-cover"><span>БИБЛИОТЕКА ВУЗА</span><strong>{{ entity_title }}</strong><span class="cover-line"></span></div>{% endif %}
+      <div class="book-info"><h3>{{ item }}</h3>
+        {% if entity_slug == 'book' %}<p>{{ item.author }} · {{ item.category }} · {{ item.publication_year }}</p>
+        {% elif entity_slug == 'reader' %}<p>{{ item.group }} · билет № {{ item.student_card }}</p>
+        {% elif entity_slug == 'loan' %}<p>{{ item.issue_date|date:'d.m.Y' }} — {{ item.due_date|date:'d.m.Y' }} · {% if item.returned %}Возвращена{% else %}На руках{% endif %}</p>
+        {% elif entity_slug == 'category' %}<p>{{ item.description|truncatechars:100 }}</p>
+        {% elif entity_slug == 'author' %}<p>{{ item.biography|truncatechars:100 }}</p>{% endif %}
+        <div class="entity-actions">
+          <a href="{% url 'library:'|add:entity_slug|add:'_detail' item.pk %}">Подробнее</a>
+          <a href="{% url 'library:'|add:entity_slug|add:'_update' item.pk %}">Изменить</a>
+          <a class="danger-link" href="{% url 'library:'|add:entity_slug|add:'_delete' item.pk %}">Удалить</a>
+        </div>
+      </div>
+    </article>
+    {% empty %}<p class="muted">Записей пока нет. Добавьте первую запись.</p>{% endfor %}
+  </div>
+</section>
+{% endblock %}

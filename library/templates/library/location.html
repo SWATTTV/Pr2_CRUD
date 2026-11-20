@@ -1,0 +1,6 @@
+{% extends 'library/base.html' %}
+{% block title %}Как нас найти{% endblock %}
+{% block content %}
+<section class="page-head"><div class="shell"><span class="eyebrow">РАСПОЛОЖЕНИЕ</span><h1>Как нас найти</h1><p>Информация о посещении библиотеки ВУЗа.</p></div></section>
+<section class="section shell narrow"><article class="feature-card location-card"><div class="feature-icon">⌖</div><h2>Расположение библиотеки</h2><p>Библиотека находится на территории учебного заведения. Номер корпуса, этаж и аудиторию необходимо уточнить в администрации или на официальном сайте вашего ВУЗа.</p><p class="muted">Адрес намеренно не указан: это демонстрационный учебный проект, не привязанный к реальному университету.</p><a class="text-link" href="{% url 'library:contacts' %}">Перейти к контактам →</a></article></section>
+{% endblock %}

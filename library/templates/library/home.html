@@ -1,0 +1,16 @@
+{% extends 'library/base.html' %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+<section class="hero"><div class="shell hero-grid"><div>
+  <span class="eyebrow light">УНИВЕРСИТЕТСКАЯ БИБЛИОТЕКА</span>
+  <h1>Пространство для <em>новых открытий</em></h1>
+  <p>Учебная литература, научные материалы и удобная среда для самостоятельной работы и подготовки к занятиям.</p>
+  <div class="actions"><a class="btn primary" href="{% url 'library:catalog' %}">Перейти к каталогу <span>↗</span></a><a class="btn ghost" href="{% url 'library:about' %}">О библиотеке</a></div>
+</div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="book-stack"><div class="book book-one"></div><div class="book book-two"></div><div class="book book-three"></div><div class="book book-four"></div></div><div class="art-caption">ЧИТАЙ · ИССЛЕДУЙ · СОЗДАВАЙ</div></div></div></section>
+<section class="section shell"><div class="section-heading"><span class="eyebrow">ВОЗМОЖНОСТИ</span><h2>Всё для успешной учёбы</h2><p>Библиотека помогает находить полезные источники и организовать учебный процесс.</p></div><div class="cards three">
+ <article class="feature-card"><div class="feature-icon">▤</div><h3>Каталог литературы</h3><p>Подбор учебных и справочных изданий по основным дисциплинам.</p><a href="{% url 'library:catalog' %}">Смотреть каталог →</a></article>
+ <article class="feature-card"><div class="feature-icon">⌁</div><h3>Работа с источниками</h3><p>Удобное пространство для чтения и подготовки к практическим занятиям.</p><a href="{% url 'library:rules' %}">Правила пользования →</a></article>
+ <article class="feature-card"><div class="feature-icon">◎</div><h3>Помощь читателям</h3><p>Информация об услугах библиотеки и способах получения консультации.</p><a href="{% url 'library:contacts' %}">Контакты →</a></article>
+</div></section>
+<section class="callout shell"><div><span class="eyebrow">НАЧНИТЕ СЕГОДНЯ</span><h2>Найдите книгу для следующей пары</h2><p>Посмотрите учебный каталог и ознакомьтесь с правилами выдачи литературы.</p></div><a class="btn dark" href="{% url 'library:catalog' %}">Открыть каталог ↗</a></section>
+{% endblock %}

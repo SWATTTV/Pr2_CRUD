@@ -1,0 +1,13 @@
+{% extends 'library/base.html' %}
+{% block title %}{{ entity_title }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="shell"><span class="eyebrow">РАБОТА С БАЗОЙ ДАННЫХ</span><h1>{{ entity_title }}</h1></div></section>
+<section class="section shell"><div class="form-card">
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+{% if form.non_field_errors %}<div class="form-errors">{{ form.non_field_errors }}</div>{% endif %}
+{% for field in form %}<div class="form-field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}{% for error in field.errors %}<small class="error">{{ error }}</small>{% endfor %}</div>{% endfor %}
+<div class="entity-actions"><button class="btn dark" type="submit">Сохранить</button><a href="{% url 'library:'|add:entity_slug|add:'_list' %}">Отмена</a></div>
+</form>
+</div></section>
+{% endblock %}
